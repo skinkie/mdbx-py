@@ -177,7 +177,7 @@ class TestMdbx(unittest.TestCase):
         txn.commit()
 
         txn = db.rw_transaction()
-        dbi = txn.open_map("multi")
+        dbi = txn.open_map("multi", mdbx.MDBXDBFlags.MDBX_DUPSORT)
         dbi.delete(txn, MDBX_TEST_KEY, MDBX_TEST_VAL_BINARY)
         utf8 = dbi.get(txn, MDBX_TEST_KEY)
         self.assertEqual(utf8, MDBX_TEST_VAL_UTF8)
